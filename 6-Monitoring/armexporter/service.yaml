@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  name: prometheus-arm-exporter
+  namespace: monitoring
+  labels:
+    app: prometheus
+    component: arm-exporter
+spec:
+  clusterIP: None
+  ports:
+    - name: prometheus-arm-exporter
+      port: 9243
+      protocol: TCP
+  selector:
+    app: prometheus
+    component: arm-exporter
+  type: ClusterIP

@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: prometheus-arm-exporter
+  namespace: monitoring
+  labels:
+    app: prometheus
+    component: arm-exporter
+spec:
+  template:
+    metadata:
+      name: prometheus-arm-exporter
+      labels:
+        app: prometheus
+        component: arm-exporter
+    spec:
+      containers:
+      - image: carlosedp/arm_exporter
+        name: arm-exporter
+        ports:
+        - name: prom-arm-exp
+          #^ must be an IANA_SVC_NAME (at most 15 characters, ..)
+          containerPort: 9243
+          hostPort: 9243
