@@ -13,3 +13,4 @@ spec:
   selector:
     app: grafana
     component: core
+  type: NodePort

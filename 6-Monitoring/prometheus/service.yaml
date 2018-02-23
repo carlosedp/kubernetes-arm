@@ -17,3 +17,4 @@ spec:
   selector:
     app: prometheus
     component: core
+  type: NodePort
