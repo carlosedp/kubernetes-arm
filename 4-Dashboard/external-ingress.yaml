@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubernetes-dashboard-external
+  namespace: kube-system
+  annotations:
+    traefik.frontend.rule.type: PathPrefix
+    #traefik.frontend.redirect.entryPoint: https
+    traefik.frontend.redirect.regex: ^http://(.*)
+    traefik.frontend.redirect.replacement: https://$1
+    ingress.kubernetes.io/auth-type: basic
+    ingress.kubernetes.io/auth-secret: dashboard-auth
+spec:
+  rules:
+  - host: dashboard.cloud.carlosedp.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 80

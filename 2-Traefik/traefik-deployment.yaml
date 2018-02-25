@@ -13,7 +13,7 @@ metadata:
   labels:
     k8s-app: traefik-ingress-lb
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       k8s-app: traefik-ingress-lb
@@ -31,6 +31,8 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: config
+        - mountPath: /etc/traefik
+          name: certificates
         ports:
          - name: http
            containerPort: 80
@@ -46,6 +48,9 @@ spec:
       - name: config
         configMap:
           name: traefik-conf
+      - name: certificates
+        persistentVolumeClaim:
+          claimName: traefik-certificates
 ---
 kind: Service
 apiVersion: v1

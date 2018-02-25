@@ -9,6 +9,7 @@ logLevel = "INFO"
   compress = true
   [entryPoints.https]
   address = ":443"
+    [entryPoints.https.tls]
 
 #[entryPoints]
 #  [entryPoints.http]
@@ -28,12 +29,16 @@ logLevel = "INFO"
   buckets=[0.1,0.3,1.2,5.0]
   entryPoint = "traefik"
 
-#[acme]
-#email = "carlosedp@gmail.com"
-#storage = "/etc/traefik/acme.json"
-#entryPoint = "https"
-#onDemand = false
-#OnHostRule = true
-#caServer = "https://acme-v01.api.letsencrypt.org/directory"
-#[acme.httpChallenge]
-#entryPoint="http"
+[acme]
+email = "carlosedp@gmail.com"
+storage = "/etc/traefik/acme.json"
+acmeLogging = true
+entryPoint = "https"
+onDemand = false
+OnHostRule = true
+caServer = "https://acme-v01.api.letsencrypt.org/directory"
+[[acme.domains]]
+  main = "cloud.carlosedp.com"
+  sans = ["internal.carlosedp.com"]
+[acme.httpChallenge]
+entryPoint="http"
