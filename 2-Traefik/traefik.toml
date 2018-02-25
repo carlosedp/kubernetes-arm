@@ -37,8 +37,5 @@ entryPoint = "https"
 onDemand = false
 OnHostRule = true
 caServer = "https://acme-v01.api.letsencrypt.org/directory"
-[[acme.domains]]
-  main = "cloud.carlosedp.com"
-  sans = ["internal.carlosedp.com"]
 [acme.httpChallenge]
 entryPoint="http"
