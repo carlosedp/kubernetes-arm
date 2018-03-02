@@ -51,24 +51,3 @@ spec:
       - name: certificates
         persistentVolumeClaim:
           claimName: traefik-certificates
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: traefik-ingress-service
-  namespace: kube-system
-spec:
-  selector:
-    k8s-app: traefik-ingress-lb
-  ports:
-    - protocol: TCP
-      port: 80
-      name: web
-    - protocol: TCP
-      port: 443
-      name: https
-    - protocol: TCP
-      port: 8080
-      name: admin
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.20
