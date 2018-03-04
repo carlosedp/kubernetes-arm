@@ -32,7 +32,7 @@ logLevel = "INFO"
 [acme]
 email = "carlosedp@gmail.com"
 storage = "/etc/traefik/acme.json"
-acmeLogging = true
+acmeLogging = false
 entryPoint = "https"
 onDemand = false
 OnHostRule = true
