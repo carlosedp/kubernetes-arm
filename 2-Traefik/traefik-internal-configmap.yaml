@@ -9,7 +9,6 @@ data:
     debug = false
     logLevel = "INFO"
 
-
     [entryPoints]
       [entryPoints.http]
       address = ":80"
@@ -32,18 +31,9 @@ data:
     [web]
       address = ":8080"
 
+    [kubernetes]
+
     [metrics]
       [metrics.prometheus]
       buckets=[0.1,0.3,1.2,5.0]
       entryPoint = "traefik"
-
-    #[acme]
-    #email = "carlosedp@gmail.com"
-    #storage = "/etc/traefik/acme.json"
-    #acmeLogging = false
-    #entryPoint = "https"
-    #onDemand = false
-    #OnHostRule = true
-    #caServer = "https://acme-v01.api.letsencrypt.org/directory"
-    #[acme.httpChallenge]
-    #entryPoint="http"

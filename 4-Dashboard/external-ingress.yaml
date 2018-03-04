@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: kubernetes-dashboard-external
   namespace: kube-system
+  labels:
+    traffic-type: external
   annotations:
     traefik.frontend.rule.type: PathPrefix
     #traefik.frontend.redirect.entryPoint: https
