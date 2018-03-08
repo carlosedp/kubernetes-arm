@@ -8,6 +8,9 @@ data:
     defaultEntryPoints = ["http","https"]
     debug = false
     logLevel = "INFO"
+    
+    # Do not verify backend certificates (use https backends)
+    InsecureSkipVerify = true
 
     [entryPoints]
       [entryPoints.http]
