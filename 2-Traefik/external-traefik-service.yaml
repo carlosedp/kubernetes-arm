@@ -5,7 +5,7 @@ metadata:
   name: traefik-ingress-service-external
   namespace: kube-system
   labels:
-    k8s-app: traefik-ingress-lb-external
+    k8s-app: traefik-ingress-lb
 spec:
   selector:
     k8s-app: traefik-ingress-lb-external

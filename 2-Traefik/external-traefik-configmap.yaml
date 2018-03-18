@@ -40,6 +40,9 @@ data:
       buckets=[0.1,0.3,1.2,5.0]
       entryPoint = "traefik"
 
+    [ping]
+    entryPoint = "http"
+
     [acme]
     email = "carlosedp@gmail.com"
     storage = "/etc/traefik/acme.json"
