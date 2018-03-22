@@ -25,6 +25,18 @@ spec:
               value: 192.168.1.55
             - name: NFS_PATH
               value: /mnt/extssd1/kube
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                  - data
+              topologyKey: kubernetes.io/hostname
       volumes:
         - name: nfs-client-root
           nfs:
