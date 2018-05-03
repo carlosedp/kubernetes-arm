@@ -9,27 +9,21 @@ data:
     debug = false
     logLevel = "INFO"
 
-    #[entryPoints]
-    #  [entryPoints.http]
-    #  address = ":80"
-    #  compress = true
-    #  [entryPoints.https]
-    #  address = ":443"
-    #    [entryPoints.https.tls]
-
     #Config to redirect http to https
     [entryPoints]
       [entryPoints.http]
-      address = ":80"
-      compress = true
+        address = ":80"
+        compress = true
         [entryPoints.http.redirect]
         entryPoint = "https"
       [entryPoints.https]
-      address = ":443"
+        address = ":443"
+        compress = true
         [entryPoints.https.tls]
 
-    [web]
-      address = ":8080"
+    [api]
+      [api.statistics]
+        recentErrors = 10
 
     [kubernetes]
       # Only create ingresses where the object has traffic-type: external label
@@ -41,15 +35,16 @@ data:
       entryPoint = "traefik"
 
     [ping]
-    entryPoint = "http"
+      entryPoint = "http"
+    
+    [accessLog]
 
     [acme]
-    email = "carlosedp@gmail.com"
-    storage = "/etc/traefik/acme.json"
-    acmeLogging = true
-    entryPoint = "https"
-    onDemand = false
-    OnHostRule = true
-    caServer = "https://acme-v01.api.letsencrypt.org/directory"
-    [acme.httpChallenge]
-    entryPoint="http"
+      email = "carlosedp@gmail.com"
+      storage = "/etc/traefik/acme.json"
+      acmeLogging = true
+      entryPoint = "https"
+      OnHostRule = true
+      #caServer = "https://acme-v01.api.letsencrypt.org/directory"
+      [acme.httpChallenge]
+        entryPoint="http"
