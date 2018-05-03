@@ -1,11 +1,12 @@
-kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: traefik-ingress-controller-external
   namespace: kube-system
   labels:
     k8s-app: traefik-ingress-lb-external
 spec:
+  serviceName: traefik-ingress-lb-external
   replicas: 2
   selector:
     matchLabels:
@@ -19,13 +20,8 @@ spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
       containers:
-      - image: traefik
+      - image: traefik:v1.5
         name: traefik-ingress-lb
-        volumeMounts:
-        - mountPath: /config
-          name: config
-        - mountPath: /etc/traefik
-          name: certificates
         ports:
          - name: http
            containerPort: 80
@@ -38,11 +34,20 @@ spec:
         - --configfile=/config/traefik.toml
         livenessProbe:
           httpGet:
-            path: /ping
-            port: 80
-          initialDelaySeconds: 3
+            path: /health
+            port: 8080
+          initialDelaySeconds: 180
           periodSeconds: 3
           timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /etc/traefik
+          name: certificates
+      volumes:
+      - name: config
+        configMap:
+          name: traefik-conf-external
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -55,10 +60,12 @@ spec:
                   values:
                   - data
               topologyKey: kubernetes.io/hostname
-      volumes:
-      - name: config
-        configMap:
-          name: traefik-conf-external
-      - name: certificates
-        persistentVolumeClaim:
-          claimName: traefik-certificates-external
+  volumeClaimTemplates:
+  - metadata:
+      name: certificates
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Mi
+
