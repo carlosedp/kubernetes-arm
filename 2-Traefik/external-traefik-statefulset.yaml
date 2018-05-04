@@ -42,8 +42,8 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: config
-        - mountPath: /etc/traefik
-          name: certificates
+        #- mountPath: /etc/traefik
+        #  name: certificates
       volumes:
       - name: config
         configMap:
@@ -60,12 +60,12 @@ spec:
                   values:
                   - data
               topologyKey: kubernetes.io/hostname
-  volumeClaimTemplates:
-  - metadata:
-      name: certificates
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 10Mi
+#  volumeClaimTemplates:
+#  - metadata:
+#      name: certificates
+#    spec:
+#      accessModes: [ "ReadWriteOnce" ]
+#      resources:
+#        requests:
+#          storage: 10Mi
 

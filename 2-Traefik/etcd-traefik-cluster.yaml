@@ -1,0 +1,12 @@
+apiVersion: "etcd.database.coreos.com/v1beta2"
+kind: "EtcdCluster"
+metadata:
+  name: "etcd-traefik-store"
+  namespace: kube-system
+  annotations:
+    etcd.database.coreos.com/scope: clusterwide
+spec:
+  size: 3
+  # Keep this version and repository for ARM64 platform. If deploying on AMD64, remove "repository" line
+  version: "3.2.18"
+  repository: "carlosedp/etcd-arm64" 

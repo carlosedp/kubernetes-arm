@@ -31,8 +31,6 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: config
-        - mountPath: /etc/traefik
-          name: certificates
         ports:
          - name: http
            containerPort: 80
@@ -67,6 +65,3 @@ spec:
       - name: config
         configMap:
           name: traefik-conf
-      - name: certificates
-        persistentVolumeClaim:
-          claimName: traefik-certificates
