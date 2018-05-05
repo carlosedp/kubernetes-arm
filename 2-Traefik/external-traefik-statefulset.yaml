@@ -19,6 +19,9 @@ spec:
     spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
+      # Remove the initContainer in case of a *big operation* to avoid inconsistencies when
+      # starting multiple pods in parallel. Might be a case a pod starts with partial config
+      # because another pod is overwriting the config in KV.
       initContainers:
       - name: storeconfig
         image: traefik:v1.5
