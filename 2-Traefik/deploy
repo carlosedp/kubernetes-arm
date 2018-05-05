@@ -24,8 +24,9 @@ kctl apply -f etcd-operator-deployment.yaml
 
 sleep 20
 # Deploy etcd cluster for Traefik
-kctl apply -f etcd-traefik-svc.yaml
 kctl apply -f etcd-traefik-cluster.yaml
+sleep 10
+kctl apply -f etcd-traefik-svc.yaml
 
 sleep 20
 # Deploy Traefik RBAC
@@ -42,8 +43,3 @@ kctl apply -f external-traefik-configmap.yaml
 # Deploy external Traefik and it's service
 kctl apply -f external-traefik-service.yaml
 kctl apply -f external-traefik-statefulset.yaml
-
-sleep 20
-# Delete job since config was already loaded into KV
-kctl delete -f external-traefik-store-KV.yaml
-

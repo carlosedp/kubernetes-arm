@@ -47,7 +47,7 @@ data:
 
     [acme]
       email = "carlosedp@gmail.com"
-      storage = "traefik-external/acme/account"
+      storage = "traefik-external-certificates/acme/account"
       acmeLogging = true
       entryPoint = "https"
       OnHostRule = true
