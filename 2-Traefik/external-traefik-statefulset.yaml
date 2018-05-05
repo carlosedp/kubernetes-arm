@@ -19,6 +19,18 @@ spec:
     spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
+      initContainers:
+      - name: storeconfig
+        image: traefik:v1.5
+        imagePullPolicy: IfNotPresent
+        args:
+        - storeconfig
+        - -c
+        - /config/traefik.toml
+        volumeMounts:
+        - name: config
+          mountPath: /etc/traefik
+          readOnly: true
       containers:
       - image: traefik:v1.5
         name: traefik-ingress-lb
@@ -42,8 +54,6 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: config
-        #- mountPath: /etc/traefik
-        #  name: certificates
       volumes:
       - name: config
         configMap:
@@ -60,12 +70,3 @@ spec:
                   values:
                   - data
               topologyKey: kubernetes.io/hostname
-#  volumeClaimTemplates:
-#  - metadata:
-#      name: certificates
-#    spec:
-#      accessModes: [ "ReadWriteOnce" ]
-#      resources:
-#        requests:
-#          storage: 10Mi
-
