@@ -36,9 +36,8 @@ kctl apply -f traefik-internal-configmap.yaml
 kctl apply -f traefik-internal-service.yaml
 kctl apply -f traefik-internal-deployment.yaml
 
-# Deploy external Traefik config and store the config into etcd KV
+# Deploy external Traefik config
 kctl apply -f external-traefik-configmap.yaml
-kctl apply -f external-traefik-store-KV.yaml
 
 # Deploy external Traefik and it's service
 kctl apply -f external-traefik-service.yaml
