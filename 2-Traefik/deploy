@@ -18,15 +18,13 @@ kctl() {
 }
 # alias kctl='kubectl --namespace logging'
 
-# Deploy etcd operator
-kctl apply -f etcd-operator-rbac.yaml
-kctl apply -f etcd-operator-deployment.yaml
 
-sleep 20
-# Deploy etcd cluster for Traefik
-kctl apply -f etcd-traefik-cluster.yaml
-sleep 10
-kctl apply -f etcd-traefik-svc.yaml
+if ! [ -x "$(command -v helm)" ]; then
+  echo 'Error: helm is not installed.' >&2
+  exit 1
+fi
+
+helm install --name traefik stable/consul --set ImageTag=1.1.0
 
 sleep 20
 # Deploy Traefik RBAC

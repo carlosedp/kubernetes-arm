@@ -2,13 +2,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: traefik-etcd-config
+  name: traefik-kv-store
 spec:
   backoffLimit: 3
   activeDeadlineSeconds: 100
   template:
     metadata:
-      name: traefik-etcd-config
+      name: traefik-kv-store
     spec:
       containers:
       - name: storeconfig

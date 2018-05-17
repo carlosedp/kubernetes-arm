@@ -39,11 +39,10 @@ data:
     
     [accessLog]
 
-    [etcd]
-      endpoint = "etcd-traefik-store.kube-system:2379"
+    [consul]
+      endpoint = "consul-traefik-consul.kube-system.svc:8500"
       watch = true
-      prefix = "/traefik-external"
-      useAPIV3 = true
+      prefix = "traefik-external"
 
     [acme]
       email = "carlosedp@gmail.com"
@@ -51,5 +50,6 @@ data:
       acmeLogging = true
       entryPoint = "https"
       OnHostRule = true
+      #caServer = "https://acme-v01.api.letsencrypt.org/directory"
       [acme.httpChallenge]
         entryPoint="http"
