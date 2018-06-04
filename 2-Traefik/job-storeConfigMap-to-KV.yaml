@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: storeconfig
-        image: traefik:v1.6
+        image: dtomcej/traefik:master-arm64-3c8c5eb
         imagePullPolicy: IfNotPresent
         args: [ "storeconfig", "-c", "/config/traefik.toml" ]
         volumeMounts:
