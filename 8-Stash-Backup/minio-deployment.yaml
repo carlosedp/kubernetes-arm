@@ -50,7 +50,7 @@ metadata:
   namespace: backup
   name: minio
   labels:
-    component: minio
+    app: minio
 spec:
   type: ClusterIP
   ports:
@@ -58,7 +58,7 @@ spec:
       targetPort: 9000
       protocol: TCP
   selector:
-    component: minio
+    app: minio
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
