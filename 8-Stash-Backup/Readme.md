@@ -47,8 +47,8 @@ Create secret and key so the backup job will be able to access S3/Minio storage.
 
 To get the status of the backups check:
 
-    kubectl get repository deployment.stash-demo
-    kubectl get snapshots -l repository=deployment.stash-demo
+    kubectl get repository deployment.stash-demo -n default
+    kubectl get snapshots -l repository=deployment.stash-demo -n default
 
 ## Restore
 
@@ -62,7 +62,7 @@ Then run the restore job:
 
 To check status:
 
-    kubectl get recovery minio-recovery -o yaml
+    kubectl get recovery minio-recovery -n default -o yaml
 
 For more information and details, check Stash documentation on https://appscode.com/products/stash/0.7.0/guides/
 

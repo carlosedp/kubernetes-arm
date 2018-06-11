@@ -1,3 +1,18 @@
+# Create an empty PVC to demonstrate the restore process
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stash-demo-restore
+  namespace: default
+  labels:
+    app: stash-demo
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -23,9 +38,13 @@ spec:
         volumeMounts:
         - mountPath: /source/data
           name: source-data
+        - mountPath: /source/restored-data # This will be empty at first
+          name: restored-volume
       restartPolicy: Always
       volumes:
-      - gitRepo:
+      - name: source-data
+        gitRepo:
           repository: https://github.com/appscode/stash-data.git
-        name: source-data
-
+      - name: restored-volume
+        persistentVolumeClaim:
+          claimName: stash-demo-restore
