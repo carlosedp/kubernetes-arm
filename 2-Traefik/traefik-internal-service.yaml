@@ -9,6 +9,7 @@ metadata:
 spec:
   selector:
     k8s-app: traefik-ingress-lb
+  externalTrafficPolicy: Local
   ports:
     - protocol: TCP
       port: 80
