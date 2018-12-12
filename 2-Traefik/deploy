@@ -8,7 +8,7 @@ fi
 # however some are hardcoded to 'monitoring'. Only use if you have reviewed all manifests.
 
 if [ -z "${NAMESPACE}" ]; then
-    NAMESPACE=logging
+    NAMESPACE=traefik
 fi
 
 kubectl create namespace "$NAMESPACE"
@@ -16,15 +16,13 @@ kubectl create namespace "$NAMESPACE"
 kctl() {
     kubectl --namespace "$NAMESPACE" "$@"
 }
-# alias kctl='kubectl --namespace logging'
-
 
 if ! [ -x "$(command -v helm)" ]; then
   echo 'Error: helm is not installed.' >&2
   exit 1
 fi
 
-helm install --name traefik stable/consul --set ImageTag=1.1.0
+helm install --name traefik stable/consul
 
 sleep 20
 # Deploy Traefik RBAC

@@ -4,4 +4,4 @@ metadata:
   name: nfs-ssd-node1
   annotations:
     storageclass.kubernetes.io/is-default-class: true
-provisioner: fuseim.pri/ssd1 # or choose another name, must match deployment's env PROVISIONER_NAME'
+provisioner: nfs-storage/ssd1 # or choose another name, must match deployment's env PROVISIONER_NAME'
