@@ -1,7 +1,9 @@
-apiVersion: storage.k8s.io/v1beta1
+apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: nfs-ssd-node1
+  name: nfs-firefly-ssd
   annotations:
-    storageclass.kubernetes.io/is-default-class: true
-provisioner: nfs-storage/ssd1 # or choose another name, must match deployment's env PROVISIONER_NAME'
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: nfs-storage/firefly-ssd # or choose another name, must match deployment's env PROVISIONER_NAME'
+parameters:
+  archiveOnDelete: "true"

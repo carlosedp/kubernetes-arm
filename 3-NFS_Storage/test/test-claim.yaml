@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: test-claim
   annotations:
-    volume.beta.kubernetes.io/storage-class: "nfs-ssd-node1"
+    volume.beta.kubernetes.io/storage-class: "nfs-firefly-ssd"
 spec:
   accessModes:
     - ReadWriteMany
