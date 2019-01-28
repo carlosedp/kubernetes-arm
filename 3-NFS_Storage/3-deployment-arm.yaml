@@ -27,9 +27,9 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: nfs-storage/firefly-ssd
+              value: nfs-storage/master-ssd
             - name: NFS_SERVER
-              value: 192.168.1.62
+              value: 192.168.1.60
             - name: NFS_PATH
               value: /data/kubernetes-storage
       affinity:
@@ -47,5 +47,5 @@ spec:
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 192.168.1.62
+            server: 192.168.1.60
             path: /data/kubernetes-storage
