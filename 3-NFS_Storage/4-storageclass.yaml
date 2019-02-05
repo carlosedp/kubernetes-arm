@@ -1,9 +1,9 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: nfs-master-ssd
+  name: nfs-ssd1
   annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: nfs-storage/master-ssd # or choose another name, must match deployment's env PROVISIONER_NAME'
+    storageclass.kubernetes.io/is-default-class: true
+provisioner: nfs-provisioner/nfs-ssd1
 parameters:
   archiveOnDelete: "true"

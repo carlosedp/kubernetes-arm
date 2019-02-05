@@ -1,16 +1,10 @@
----
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: extensions/v1beta1
 metadata:
   name: nfs-client-provisioner
   namespace: nfs-storage
-  labels:
-    app: nfs-client-provisioner
 spec:
   replicas: 2
-  selector:
-    matchLabels:
-      app: nfs-client-provisioner
   strategy:
     type: RollingUpdate
   template:
@@ -27,7 +21,7 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: nfs-storage/master-ssd
+              value: nfs-provisioner/nfs-ssd1
             - name: NFS_SERVER
               value: 192.168.1.60
             - name: NFS_PATH
@@ -44,6 +38,7 @@ spec:
                   values:
                   - data
               topologyKey: kubernetes.io/hostname
+
       volumes:
         - name: nfs-client-root
           nfs:
