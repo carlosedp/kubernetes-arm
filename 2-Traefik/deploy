@@ -8,19 +8,12 @@ fi
 # however some are hardcoded to 'monitoring'. Only use if you have reviewed all manifests.
 
 if [ -z "${NAMESPACE}" ]; then
-    NAMESPACE=traefik
+    NAMESPACE=kube-system
 fi
-
-kubectl create namespace "$NAMESPACE"
 
 kctl() {
     kubectl --namespace "$NAMESPACE" "$@"
 }
-
-if ! [ -x "$(command -v helm)" ]; then
-  echo 'Error: helm is not installed.' >&2
-  exit 1
-fi
 
 # Deploy Traefik RBAC
 kctl apply -f traefik-rbac.yaml
