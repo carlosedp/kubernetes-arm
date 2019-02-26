@@ -33,10 +33,10 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: role
+                - key: app
                   operator: In
                   values:
-                  - data
+                  - nfs-client-provisioner
               topologyKey: kubernetes.io/hostname
 
       volumes:
