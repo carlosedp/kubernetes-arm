@@ -75,8 +75,8 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: role
+                - key: k8s-app
                   operator: In
                   values:
-                  - data
+                  - traefik-ingress-lb
               topologyKey: kubernetes.io/hostname
