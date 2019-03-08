@@ -21,13 +21,15 @@ if ! [ -x "$(command -v helm)" ]; then
 fi
 
 ./deploy_consul_cluster.sh
+./generate_godaddy_secret.sh
 
 sleep 20
 # Deploy Traefik RBAC
 kctl apply -f ../traefik-rbac.yaml
 
-# Deploy external Traefik config
+# Deploy external Traefik config and store it into Consul
 kctl apply -f external-traefik-configmap.yaml
+kctl apply -f job-storeConfigMap-to-KV.yaml
 
 # Deploy external Traefik and it's service
 kctl apply -f external-traefik-service.yaml

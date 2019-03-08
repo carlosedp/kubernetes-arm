@@ -6,13 +6,14 @@ metadata:
 spec:
   backoffLimit: 3
   activeDeadlineSeconds: 100
+  ttlSecondsAfterFinished: 5
   template:
     metadata:
       name: traefik-kv-store
     spec:
       containers:
       - name: storeconfig
-        image: dtomcej/traefik:master-arm64-3c8c5eb
+        image: traefik:v1.7
         imagePullPolicy: IfNotPresent
         args: [ "storeconfig", "-c", "/config/traefik.toml" ]
         volumeMounts:

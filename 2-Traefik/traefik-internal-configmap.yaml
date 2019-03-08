@@ -8,7 +8,7 @@ data:
     defaultEntryPoints = ["http","https"]
     debug = false
     logLevel = "INFO"
-    
+
     # Do not verify backend certificates (use https backends)
     InsecureSkipVerify = true
 
@@ -42,5 +42,6 @@ data:
       [metrics.prometheus]
       buckets=[0.1,0.3,1.2,5.0]
       entryPoint = "traefik"
+
     [ping]
     entryPoint = "http"

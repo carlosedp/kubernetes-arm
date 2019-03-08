@@ -5,5 +5,5 @@ if [[ $# -eq 0 ]] ; then
 fi
 printf "${1}:`openssl passwd -apr1`\n" >> ingress_auth.tmp
 kubectl delete secret -n ${2} ingress-auth
-kubectl create secret generic ingress-auth --from-file=auth -n ${2}
+kubectl create secret generic ingress-auth --from-file=ingress_auth.tmp -n ${2}
 rm ingress_auth.tmp

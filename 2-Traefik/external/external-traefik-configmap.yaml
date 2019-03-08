@@ -36,11 +36,11 @@ data:
 
     [ping]
       entryPoint = "http"
-    
+
     [accessLog]
 
     [consul]
-      endpoint = "consul-traefik-consul.kube-system.svc:8500"
+      endpoint = "consul-traefik.kube-system.svc:8500"
       watch = true
       prefix = "traefik-external"
 
@@ -51,5 +51,10 @@ data:
       entryPoint = "https"
       OnHostRule = true
       #caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
-      [acme.httpChallenge]
-        entryPoint="http"
+
+      # [acme.httpChallenge]
+      #   entryPoint="http"
+
+      [acme.dnsChallenge]
+        provider = "godaddy"
+        delayBeforeCheck = 0

@@ -35,7 +35,7 @@ spec:
       #    mountPath: /etc/traefik
       #    readOnly: true
       containers:
-      - image: traefik:v1.6
+      - image: traefik:v1.7
         name: traefik-ingress-lb
         ports:
          - name: http
@@ -47,6 +47,17 @@ spec:
         args:
         - --api
         - --configfile=/config/traefik.toml
+        env:
+          - name: GODADDY_API_KEY
+            valueFrom:
+              secretKeyRef:
+                key: key
+                name: traefik-external-godaddy
+          - name: GODADDY_API_SECRET
+            valueFrom:
+              secretKeyRef:
+                key: secret
+                name: traefik-external-godaddy
         livenessProbe:
           httpGet:
             path: /health
