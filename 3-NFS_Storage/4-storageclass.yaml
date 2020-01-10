@@ -3,7 +3,7 @@ kind: StorageClass
 metadata:
   name: nfs-ssd1
   annotations:
-    storageclass.kubernetes.io/is-default-class: true
+    storageclass.kubernetes.io/is-default-class: "true"
 provisioner: nfs-provisioner/nfs-ssd1
 parameters:
   archiveOnDelete: "true"
