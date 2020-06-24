@@ -40,7 +40,7 @@ items:
         name: weave-scope
     rules:
       - apiGroups:
-          - ''
+          - ""
         resources:
           - pods
         verbs:
@@ -49,7 +49,7 @@ items:
           - watch
           - delete
       - apiGroups:
-          - ''
+          - ""
         resources:
           - pods/log
           - services
@@ -125,7 +125,7 @@ items:
       - kind: ServiceAccount
         name: weave-scope
         namespace: weave
-  - apiVersion: apps/v1beta1
+  - apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: weave-scope-app
@@ -158,7 +158,7 @@ items:
           containers:
             - name: app
               args:
-                - '--mode=app'
+                - "--mode=app"
               command:
                 - /home/weave/scope
               env: []
@@ -229,12 +229,12 @@ items:
           containers:
             - name: scope-agent
               args:
-                - '--mode=probe'
-                - '--probe-only'
-                - '--probe.kubernetes=true'
-                - '--probe.docker.bridge=docker0'
-                - '--probe.docker=true'
-                - 'weave-scope-app.weave.svc.cluster.local:80'
+                - "--mode=probe"
+                - "--probe-only"
+                - "--probe.kubernetes=true"
+                - "--probe.docker.bridge=docker0"
+                - "--probe.docker=true"
+                - "weave-scope-app.weave.svc.cluster.local:80"
               command:
                 - /home/weave/scope
               env:

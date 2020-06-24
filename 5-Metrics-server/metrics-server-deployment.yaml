@@ -5,7 +5,7 @@ metadata:
   name: metrics-server
   namespace: kube-system
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: metrics-server
@@ -24,19 +24,19 @@ spec:
     spec:
       serviceAccountName: metrics-server
       volumes:
-      # mount in tmp so we can safely use from-scratch images and/or read-only containers
-      - name: tmp-dir
-        emptyDir: {}
-      containers:
-      - name: metrics-server
-        image: k8s.gcr.io/metrics-server-arm64:v0.3.1
-        command:
-          - /metrics-server
-          - --kubelet-insecure-tls
-          - --kubelet-preferred-address-types=InternalIP
-        imagePullPolicy: Always
-        volumeMounts:
+        # mount in tmp so we can safely use from-scratch images and/or read-only containers
         - name: tmp-dir
-          mountPath: /tmp
+          emptyDir: {}
+      containers:
+        - name: metrics-server
+          image: k8s.gcr.io/metrics-server-arm64:v0.3.1
+          command:
+            - /metrics-server
+            - --kubelet-insecure-tls
+            - --kubelet-preferred-address-types=InternalIP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: tmp-dir
+              mountPath: /tmp
       nodeSelector:
         beta.kubernetes.io/arch: arm64
